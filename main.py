@@ -1,5 +1,4 @@
 import random
-from textwrap import dedent
 import streamlit as st
 
 # ---------------------------------------------------------
@@ -407,160 +406,85 @@ MBTI_NICKNAMES = {
 
 # ---------------------------------------------------------
 # 디자인
+# 화면에 표시되는 콘텐츠에는 HTML 태그를 사용하지 않습니다.
+# 아래 CSS는 디자인만 담당하며 화면에 코드로 노출되지 않습니다.
 # ---------------------------------------------------------
 st.markdown(
     """
     <style>
         .stApp {
             background:
-                radial-gradient(circle at 15% 10%, #ffe3f1 0, transparent 24%),
-                radial-gradient(circle at 90% 20%, #e1f3ff 0, transparent 26%),
-                linear-gradient(180deg, #fff9fc 0%, #fffdf7 100%);
+                radial-gradient(circle at 15% 8%, #ffe3f1 0, transparent 25%),
+                radial-gradient(circle at 90% 18%, #e7e1ff 0, transparent 28%),
+                linear-gradient(180deg, #fff9fc 0%, #fffdf8 100%);
         }
 
         .block-container {
             max-width: 780px;
-            padding-top: 2rem;
+            padding-top: 2.2rem;
             padding-bottom: 3rem;
         }
 
-        .hero {
+        h1 {
             text-align: center;
-            padding: 2rem 1rem 1.2rem;
-        }
-
-        .hero-badge {
-            display: inline-block;
-            padding: 0.45rem 0.9rem;
-            border-radius: 999px;
-            background: #ffffffcc;
-            border: 1px solid #ffd4e6;
-            color: #d85b91;
-            font-weight: 700;
-            box-shadow: 0 8px 24px rgba(216, 91, 145, 0.08);
-        }
-
-        .hero-title {
-            margin: 0.8rem 0 0.35rem;
-            font-size: clamp(2.2rem, 7vw, 3.8rem);
-            line-height: 1.15;
-            color: #432f43;
+            color: #402f40;
             letter-spacing: -0.06em;
+            margin-bottom: 0.2rem;
         }
 
-        .hero-subtitle {
-            color: #7f697c;
-            font-size: 1rem;
-            margin-bottom: 0;
-        }
-
-        .picker-box {
-            background: rgba(255, 255, 255, 0.78);
-            border: 1px solid rgba(255, 203, 226, 0.9);
-            border-radius: 26px;
-            padding: 1.2rem 1.25rem 0.8rem;
-            box-shadow: 0 18px 50px rgba(111, 73, 101, 0.09);
-            backdrop-filter: blur(8px);
-        }
-
-        .movie-card {
-            position: relative;
-            overflow: hidden;
-            margin-top: 1.35rem;
-            background: linear-gradient(135deg, #ffffff 0%, #fff5fa 100%);
-            border: 2px solid #ffd6e8;
-            border-radius: 30px;
-            padding: 1.7rem;
-            box-shadow: 0 20px 55px rgba(160, 91, 127, 0.14);
-        }
-
-        .movie-card::after {
-            content: "♡";
-            position: absolute;
-            right: 18px;
-            top: 5px;
-            font-size: 5.5rem;
-            color: rgba(255, 167, 203, 0.22);
-            transform: rotate(12deg);
-        }
-
-        .movie-emoji {
-            font-size: 4.5rem;
-            margin-bottom: 0.4rem;
-        }
-
-        .movie-label {
-            display: inline-block;
-            background: #ffdfec;
-            color: #b84478;
-            padding: 0.35rem 0.72rem;
-            border-radius: 999px;
-            font-size: 0.82rem;
-            font-weight: 800;
-        }
-
-        .movie-title {
-            color: #3f2e3d;
-            margin: 0.55rem 0 0.25rem;
-            font-size: 2rem;
+        h2, h3 {
+            color: #493847;
             letter-spacing: -0.04em;
         }
 
-        .movie-genre {
-            color: #a06e88;
-            font-weight: 700;
-            margin-bottom: 1rem;
-        }
-
-        .reason-box {
-            background: #ffffff;
-            border-radius: 20px;
-            padding: 1rem 1.05rem;
-            border: 1px dashed #f2aac8;
-            color: #5f4d5b;
-            line-height: 1.7;
-        }
-
-        .mood {
-            margin-top: 0.85rem;
-            color: #8b6078;
-            font-size: 0.93rem;
-        }
-
-        .tiny-note {
+        div[data-testid="stCaptionContainer"] {
             text-align: center;
-            color: #9a8795;
-            font-size: 0.82rem;
-            margin-top: 1.5rem;
+            color: #8f7486;
+        }
+
+        div[data-testid="stSelectbox"] {
+            background: rgba(255, 255, 255, 0.82);
+            border: 1px solid #ffd0e3;
+            border-radius: 22px;
+            padding: 1rem 1rem 0.3rem;
+            box-shadow: 0 14px 35px rgba(164, 92, 128, 0.10);
         }
 
         div[data-testid="stSelectbox"] label {
-            color: #594554;
+            color: #5e4858;
             font-weight: 800;
             font-size: 1rem;
         }
 
         div.stButton > button {
             width: 100%;
-            min-height: 3.2rem;
+            min-height: 3.25rem;
             border: 0;
             border-radius: 18px;
-            background: linear-gradient(90deg, #ff8dbc, #a78bfa);
+            background: linear-gradient(90deg, #ff8cbc, #9d82f4);
             color: white;
             font-weight: 800;
             font-size: 1rem;
-            box-shadow: 0 10px 25px rgba(221, 110, 168, 0.25);
+            box-shadow: 0 12px 28px rgba(190, 102, 168, 0.24);
             transition: transform 0.18s ease, box-shadow 0.18s ease;
         }
 
         div.stButton > button:hover {
             transform: translateY(-2px);
-            box-shadow: 0 14px 30px rgba(180, 103, 188, 0.32);
             color: white;
+            box-shadow: 0 16px 34px rgba(167, 94, 173, 0.30);
         }
 
-        div.stButton > button:active {
-            transform: translateY(0);
+        div[data-testid="stVerticalBlockBorderWrapper"] {
+            background: rgba(255, 255, 255, 0.86);
+            border: 2px solid #ffd0e3 !important;
+            border-radius: 28px;
+            padding: 1rem;
+            box-shadow: 0 20px 50px rgba(150, 83, 120, 0.13);
+        }
+
+        div[data-testid="stAlert"] {
+            border-radius: 18px;
         }
 
         #MainMenu, footer, header {
@@ -582,49 +506,41 @@ if "movie_index" not in st.session_state:
         len(MOVIES[st.session_state.selected_mbti])
     )
 
+
 def pick_new_movie():
-    """현재 MBTI 안에서 이전 영화와 다른 작품을 고릅니다."""
+    """같은 성격 유형 안에서 현재 영화와 다른 작품을 고릅니다."""
     movie_count = len(MOVIES[st.session_state.selected_mbti])
 
     if movie_count <= 1:
         st.session_state.movie_index = 0
         return
 
-    candidates = [
+    available_indices = [
         index
         for index in range(movie_count)
         if index != st.session_state.movie_index
     ]
-    st.session_state.movie_index = random.choice(candidates)
+    st.session_state.movie_index = random.choice(available_indices)
+
 
 def change_mbti():
-    """MBTI가 바뀌면 해당 유형의 첫 추천 영화를 무작위로 정합니다."""
+    """성격 유형이 바뀌면 해당 유형의 영화를 새로 고릅니다."""
     st.session_state.movie_index = random.randrange(
         len(MOVIES[st.session_state.selected_mbti])
     )
 
+
 # ---------------------------------------------------------
 # 화면
+# 화면에 보이는 부분은 Streamlit 기본 요소만 사용합니다.
 # ---------------------------------------------------------
-st.markdown(
-    dedent(
-        """
-        <section class="hero">
-            <div class="hero-badge">🍿 오늘의 영화 취향 찾기</div>
-            <h1 class="hero-title">MBTI 영화 처방소</h1>
-            <p class="hero-subtitle">
-                나의 MBTI를 고르면 오늘의 기분에 어울리는 영화를 추천해드려요.
-            </p>
-        </section>
-        """
-    ).strip(),
-    unsafe_allow_html=True,
-)
+st.title("🎬 MBTI 영화 처방소")
+st.caption("나의 MBTI를 고르면 오늘의 기분에 어울리는 영화를 추천해드려요. 💗")
 
-st.markdown('<div class="picker-box">', unsafe_allow_html=True)
+st.write("")
 
 st.selectbox(
-    "나의 MBTI는?",
+    "나의 MBTI를 선택하세요",
     options=list(MOVIES.keys()),
     key="selected_mbti",
     format_func=lambda mbti: f"{mbti} · {MBTI_NICKNAMES[mbti]}",
@@ -637,42 +553,29 @@ st.button(
     use_container_width=True,
 )
 
-st.markdown("</div>", unsafe_allow_html=True)
+st.write("")
 
 mbti = st.session_state.selected_mbti
 movie = MOVIES[mbti][st.session_state.movie_index]
 
-st.markdown(
-    dedent(
-        f"""
-        <article class="movie-card">
-            <div class="movie-emoji">{movie["emoji"]}</div>
-            <span class="movie-label">{mbti} 맞춤 추천</span>
-            <h2 class="movie-title">{movie["title"]}</h2>
-            <div class="movie-genre">{movie["genre"]}</div>
+with st.container(border=True):
+    st.markdown(f"# {movie['emoji']}")
+    st.markdown(f"**💗 {mbti} 맞춤 추천**")
+    st.markdown(f"## {movie['title']}")
+    st.markdown(f"**장르:** {movie['genre']}")
 
-            <div class="reason-box">
-                <strong>💌 추천 이유</strong><br>
-                {movie["reason"]}
-            </div>
+    st.write("")
 
-            <div class="mood">
-                <strong>🍿 오늘의 관람 처방</strong><br>
-                {movie["mood"]}
-            </div>
-        </article>
-        """
-    ).strip(),
-    unsafe_allow_html=True,
-)
+    st.info(
+        f"""💌 **추천 이유**
 
-st.markdown(
-    dedent(
-        """
-        <p class="tiny-note">
-            MBTI 추천은 재미로 가볍게 즐겨주세요. 취향은 언제든 달라질 수 있어요! 🎀
-        </p>
-        """
-    ).strip(),
-    unsafe_allow_html=True,
-)
+{movie['reason']}"""
+    )
+
+    st.success(
+        f"""🍿 **오늘의 관람 처방**
+
+{movie['mood']}"""
+    )
+
+st.caption("MBTI 추천은 재미로 가볍게 즐겨주세요. 취향은 언제든 달라질 수 있어요! 🎀")
