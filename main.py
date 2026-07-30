@@ -1,4 +1,5 @@
 import random
+from textwrap import dedent
 import streamlit as st
 
 # ---------------------------------------------------------
@@ -606,15 +607,17 @@ def change_mbti():
 # 화면
 # ---------------------------------------------------------
 st.markdown(
-    """
-    <section class="hero">
-        <div class="hero-badge">🍿 오늘의 영화 취향 찾기</div>
-        <h1 class="hero-title">MBTI 영화 처방소</h1>
-        <p class="hero-subtitle">
-            나의 MBTI를 고르면 오늘의 기분에 어울리는 영화를 추천해드려요.
-        </p>
-    </section>
-    """,
+    dedent(
+        """
+        <section class="hero">
+            <div class="hero-badge">🍿 오늘의 영화 취향 찾기</div>
+            <h1 class="hero-title">MBTI 영화 처방소</h1>
+            <p class="hero-subtitle">
+                나의 MBTI를 고르면 오늘의 기분에 어울리는 영화를 추천해드려요.
+            </p>
+        </section>
+        """
+    ).strip(),
     unsafe_allow_html=True,
 )
 
@@ -640,31 +643,36 @@ mbti = st.session_state.selected_mbti
 movie = MOVIES[mbti][st.session_state.movie_index]
 
 st.markdown(
-    f"""
-    <article class="movie-card">
-        <div class="movie-emoji">{movie["emoji"]}</div>
-        <span class="movie-label">{mbti} 맞춤 추천</span>
-        <h2 class="movie-title">{movie["title"]}</h2>
-        <div class="movie-genre">{movie["genre"]}</div>
+    dedent(
+        f"""
+        <article class="movie-card">
+            <div class="movie-emoji">{movie["emoji"]}</div>
+            <span class="movie-label">{mbti} 맞춤 추천</span>
+            <h2 class="movie-title">{movie["title"]}</h2>
+            <div class="movie-genre">{movie["genre"]}</div>
 
-        <div class="reason-box">
-            <strong>💌 추천 이유</strong><br>
-            {movie["reason"]}
-        </div>
+            <div class="reason-box">
+                <strong>💌 추천 이유</strong><br>
+                {movie["reason"]}
+            </div>
 
-        <div class="mood">
-            <strong>오늘의 관람 처방:</strong> {movie["mood"]}
-        </div>
-    </article>
-    """,
+            <div class="mood">
+                <strong>🍿 오늘의 관람 처방</strong><br>
+                {movie["mood"]}
+            </div>
+        </article>
+        """
+    ).strip(),
     unsafe_allow_html=True,
 )
 
 st.markdown(
-    """
-    <p class="tiny-note">
-        MBTI 추천은 재미로 가볍게 즐겨주세요. 취향은 언제든 달라질 수 있어요! 🎀
-    </p>
-    """,
+    dedent(
+        """
+        <p class="tiny-note">
+            MBTI 추천은 재미로 가볍게 즐겨주세요. 취향은 언제든 달라질 수 있어요! 🎀
+        </p>
+        """
+    ).strip(),
     unsafe_allow_html=True,
 )
