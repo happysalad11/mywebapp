@@ -1,6 +1,4 @@
-from pathlib import Path
-
-code = r'''import random
+import random
 import streamlit as st
 
 # ---------------------------------------------------------
